@@ -18,12 +18,13 @@ import { useRef } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import dynamic from 'next/dynamic';
+import AiOutlineClose from 'react-icons/ai';
 const Picker = dynamic(() => import('emoji-picker-react'), {
     ssr: false,
 });
 
 import 'emoji-mart/css/emoji-mart.css';
-import CloseIcon from '@material-ui/icons/close';
+
 import { useSelector } from 'react-redux';
 function ChatScreen({ chat, messages }) {
     const filePickerRef = useRef(null);
@@ -237,12 +238,14 @@ function ChatScreen({ chat, messages }) {
             </MessageContainer>
             {file && (
                 <ShowCase>
-                    <CloseIconn
+                    <button
                         onClick={() => {
                             setSelectedFile(null);
                             setFile(null);
                         }}
-                    />
+                    >
+                        X
+                    </button>
                     <img src={selectedFile} />
                     <SendImg onClick={handleSubmit}>
                         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -481,8 +484,4 @@ const Background = styled.div`
     @media (max-width: 868px) {
         left: 0;
     }
-`;
-const CloseIconn = styled(CloseIcon)`
-    cursor: pointer;
-    margin: 5px;
 `;
